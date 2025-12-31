@@ -5,6 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cool Vibrant Farm</title>
 
+  <!-- ================= Favicons ================= -->
+  <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon/favicon-16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="./assets/favicon/android-chrome-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="./assets/favicon/android-chrome-512.png">
+
   <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
@@ -24,9 +31,10 @@
       height: 100vh;
       overflow: hidden;
       background: #f4f4f2;
+      cursor: none; /* hide default cursor */
     }
 
-    /* 🔥 High-quality parallax background */
+    /* ================= Background ================= */
     .bg-parallax {
       position: fixed;
       top: -4%;
@@ -35,20 +43,16 @@
       height: 108%;
       background-image: url("./assets/bg-food.png");
       background-size: cover;
-      background-position: center center;
+      background-position: center;
       background-repeat: no-repeat;
-
-      /* Quality helpers */
-      image-rendering: auto;
       backface-visibility: hidden;
       transform: translateZ(0);
-
       transition: transform 0.18s ease-out;
       will-change: transform;
       z-index: -1;
     }
 
-    /* Foreground content (UNCHANGED) */
+    /* ================= Content ================= */
     .container {
       height: 100vh;
       display: flex;
@@ -104,7 +108,33 @@
     .fa-youtube { color: #ff0000; }
     .fa-instagram { color: #e1306c; }
 
-    .social:hover { opacity: 0.85; }
+    .social:hover {
+      opacity: 0.85;
+    }
+
+    /* ================= Leaf Cursor ================= */
+    .leaf-cursor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 28px;
+      height: 28px;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%) rotate(0deg) scale(1);
+      transition: transform 0.15s ease-out;
+    }
+
+    .leaf-cursor svg {
+      width: 100%;
+      height: 100%;
+      fill: #1f8b24;
+    }
+
+    /* Hover scale effect */
+    .leaf-cursor.hover {
+      transform: translate(-50%, -50%) scale(1.25);
+    }
 
     @media (max-width: 600px) {
       .description {
@@ -125,14 +155,15 @@
 
   <!-- Foreground -->
   <div class="container">
-
     <div class="logo">
       <img src="./assets/logo.svg" alt="Cool Vibrant Farm Logo">
     </div>
 
     <div class="description">
-      A new initiative connecting sustainability, community, and mindful living launching soon.<br>
-      Stay tuned for updates.
+      <p> A new initiative connecting sustainability, community, and mindful living launching soon.<br>
+        <br>
+      </p>
+      <p> Stay tuned for updates. </p>
     </div>
 
     <div class="socials">
@@ -146,18 +177,46 @@
         <span>CoolVibrantFarm</span>
       </a>
     </div>
-
   </div>
 
+  <!-- Leaf Cursor -->
+  <div class="leaf-cursor">
+    <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+      <path d="M32 2C20 12 10 26 8 40c-2 12 6 22 18 22 14 0 30-16 30-34C56 12 44 4 32 2z"/>
+      <path d="M32 8c-4 10-8 18-16 28" stroke="#145c18" stroke-width="3" fill="none"/>
+    </svg>
+  </div>
+
+  <!-- Scripts -->
   <script>
     const bg = document.querySelector(".bg-parallax");
+    const leaf = document.querySelector(".leaf-cursor");
+    const hoverTargets = document.querySelectorAll("a, button");
+
+    let lastX = window.innerWidth / 2;
+    let lastY = window.innerHeight / 2;
 
     document.addEventListener("mousemove", (e) => {
-      const x = (e.clientX / window.innerWidth - 0.5) * 14;
-      const y = (e.clientY / window.innerHeight - 0.5) * 14;
+      const x = e.clientX;
+      const y = e.clientY;
 
-      /* Lower scale = higher clarity */
-      bg.style.transform = `translate(${x}px, ${y}px) scale(1.02)`;
+      /* Background movement */
+      const bgX = (x / window.innerWidth - 0.5) * 14;
+      const bgY = (y / window.innerHeight - 0.5) * 14;
+      bg.style.transform = `translate(${bgX}px, ${bgY}px) scale(1.02)`;
+
+      /* Leaf rotation */
+      const angle = Math.atan2(y - lastY, x - lastX) * 180 / Math.PI;
+      leaf.style.transform = `translate(${x}px, ${y}px) rotate(${angle + 45}deg) scale(1)`;
+
+      lastX = x;
+      lastY = y;
+    });
+
+    /* Hover scale logic */
+    hoverTargets.forEach(el => {
+      el.addEventListener("mouseenter", () => leaf.classList.add("hover"));
+      el.addEventListener("mouseleave", () => leaf.classList.remove("hover"));
     });
   </script>
 

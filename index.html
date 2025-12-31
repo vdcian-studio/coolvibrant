@@ -3,201 +3,177 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <title>Cool Vibrant Farm</title>
-  <meta name="description" content="A new initiative connecting sustainability, community, and mindful living." />
 
   <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
 
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
   <style>
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
 
     body {
       font-family: "Poppins", sans-serif;
-      background: #F1F1F1;
-      color: #2f2b2b;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
+      height: 100vh;
+      overflow: hidden;
+      background: #f4f4f2;
     }
 
-    /* ---------- Layout ---------- */
+    /* Moving background */
+    .bg-parallax {
+      position: fixed;
+      top: -6%;
+      left: -6%;
+      width: 112%;
+      height: 112%;
+      background-image: url("./assets/bg-food.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      transition: transform 0.15s ease-out;
+      will-change: transform;
+      z-index: -1;
+    }
+
+    /* Content */
     .container {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       text-align: center;
-      max-width: 480px;
-      width: 100%;
-      padding: 40px 20px;
+      color: #2f2b2b;
+      backdrop-filter: blur(0.6px);
     }
 
     .logo {
-      width: 100px;
-      height: 100px;
-      margin: 0 auto 24px;
-      border-radius: 16px;
-      object-fit: cover;
+      width: 110px;
+      height: 110px;
+      background: #1f8b24;
+      border-radius: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+
+    .logo img {
+      width: 65%;
     }
 
     .description {
-      font-size: 16px;
+      max-width: 620px;
+      font-size: 20px;
       line-height: 1.6;
-      margin-bottom: 32px;
+      margin-bottom: 35px;
     }
 
-    .description span {
-      display: inline;
-    }
-
-    /* ---------- Socials ---------- */
     .socials {
       display: flex;
-      flex-direction: column; /* ✅ mobile stack */
+      gap: 50px;
+      font-size: 20px;
       align-items: center;
-      gap: 18px;
-      width: 100%;
-      margin: 0 auto;
     }
 
-    .social-item {
-      position: relative;
-      display: inline-flex;
+    .social {
+      display: flex;
       align-items: center;
-      gap: 10px;
-      font-size: 15px;
+      gap: 12px;
+      color: #000;
       text-decoration: none;
-      color: inherit;
-      padding: 8px 12px;
-      border-radius: 999px;
-      overflow: hidden;
-      transition: transform 0.2s ease, background-color 0.2s ease;
     }
 
-    .social-item img {
-      width: 28px;
-      height: 28px;
+    .social i {
+      font-size: 26px;
     }
 
-    /* ---------- Hover effect ---------- */
-    @media (hover: hover) {
-      .social-item:hover {
-        background: rgba(0, 0, 0, 0.05);
-        transform: translateY(-2px);
-      }
+    .fa-youtube {
+      color: #ff0000;
     }
 
-    /* ---------- Ripple effect ---------- */
-    .social-item::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle, rgba(0,0,0,0.25) 10%, transparent 11%);
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: 0% 0%;
-      transition: background-size 0.4s ease;
-      pointer-events: none;
+    .fa-instagram {
+      color: #e1306c;
     }
 
-    .social-item:active::after {
-      background-size: 150% 150%;
-      transition: background-size 0s;
+    .social:hover {
+      opacity: 0.85;
     }
 
-    /* ---------- Tablet ---------- */
-    @media (min-width: 600px) {
-      .logo {
-        width: 120px;
-        height: 120px;
-      }
-
+    @media (max-width: 600px) {
       .description {
-        font-size: 18px;
-      }
-
-      .socials {
-        flex-direction: row;
-        gap: 40px;
-        justify-content: center;
-      }
-
-      .social-item {
         font-size: 16px;
-      }
-
-      .social-item img {
-        width: 32px;
-        height: 32px;
-      }
-    }
-
-    /* ---------- Desktop & Large screens ---------- */
-    @media (min-width: 1024px) {
-      .container {
-        max-width: 900px;
-      }
-
-      .description span {
-        display: block;
-      }
-
-      .line-1 {
-        white-space: nowrap;
+        padding: 0 20px;
       }
 
       .socials {
-        max-width: 520px;
+        flex-direction: column;
+        gap: 20px;
       }
     }
   </style>
 </head>
 <body>
 
-  <main class="container">
-    <img
-      src="./assets/cv_logo.png"
-      alt="Cool Vibrant Farm Logo"
-      class="logo"
-    />
+  <!-- Background -->
+  <div class="bg-parallax"></div>
 
-    <p class="description">
-      <span class="line-1">
-        A new initiative connecting sustainability, community, and mindful living launching soon.
-      </span>
-      <span class="line-2">
-        Stay tuned for updates.
-      </span>
-    </p>
+  <!-- Foreground Content -->
+  <div class="container">
+
+    <div class="logo">
+      <img src="./assets/logo.svg" alt="Cool Vibrant Farm Logo">
+    </div>
+
+    <div class="description">
+      <p> A new initiative connecting sustainability, community, and mindful living launching soon.</p>
+      <p><br>
+        Stay tuned for updates. </p>
+    </div>
 
     <div class="socials">
+      <!-- YouTube -->
       <a
+        class="social"
         href="https://www.youtube.com/@CoolVibrantFarms"
         target="_blank"
         rel="noopener noreferrer"
-
-        class="social-item"
       >
-        <img src="./assets/youtube.png" alt="YouTube Icon">
+        <i class="fa-brands fa-youtube"></i>
         <span>@CoolVibrantFarms</span>
       </a>
 
+      <!-- Instagram -->
       <a
-        href="https://www.instagram.com/coolvibrant_farm"
+        class="social"
+        href="https://www.instagram.com/coolvibrant_farm/"
         target="_blank"
         rel="noopener noreferrer"
-        class="social-item"
       >
-        <img src="./assets/insta.png" alt="Instagram Icon">
+        <i class="fa-brands fa-instagram"></i>
         <span>CoolVibrantFarm</span>
       </a>
     </div>
-  </main>
+
+  </div>
+
+  <script>
+    const bg = document.querySelector(".bg-parallax");
+
+    document.addEventListener("mousemove", (e) => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 18;
+      const y = (e.clientY / window.innerHeight - 0.5) * 18;
+
+      bg.style.transform = `translate(${x}px, ${y}px) scale(1.05)`;
+    });
+  </script>
 
 </body>
 </html>

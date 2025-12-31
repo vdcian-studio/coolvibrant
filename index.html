@@ -26,23 +26,29 @@
       background: #f4f4f2;
     }
 
-    /* Moving background */
+    /* 🔥 High-quality parallax background */
     .bg-parallax {
       position: fixed;
-      top: -6%;
-      left: -6%;
-      width: 112%;
-      height: 112%;
+      top: -4%;
+      left: -4%;
+      width: 108%;
+      height: 108%;
       background-image: url("./assets/bg-food.png");
       background-size: cover;
-      background-position: center;
+      background-position: center center;
       background-repeat: no-repeat;
-      transition: transform 0.15s ease-out;
+
+      /* Quality helpers */
+      image-rendering: auto;
+      backface-visibility: hidden;
+      transform: translateZ(0);
+
+      transition: transform 0.18s ease-out;
       will-change: transform;
       z-index: -1;
     }
 
-    /* Content */
+    /* Foreground content (UNCHANGED) */
     .container {
       height: 100vh;
       display: flex;
@@ -51,7 +57,7 @@
       justify-content: center;
       text-align: center;
       color: #2f2b2b;
-      backdrop-filter: blur(0.6px);
+      backdrop-filter: blur(0.5px);
     }
 
     .logo {
@@ -95,24 +101,16 @@
       font-size: 26px;
     }
 
-    .fa-youtube {
-      color: #ff0000;
-    }
+    .fa-youtube { color: #ff0000; }
+    .fa-instagram { color: #e1306c; }
 
-    .fa-instagram {
-      color: #e1306c;
-    }
-
-    .social:hover {
-      opacity: 0.85;
-    }
+    .social:hover { opacity: 0.85; }
 
     @media (max-width: 600px) {
       .description {
         font-size: 16px;
         padding: 0 20px;
       }
-
       .socials {
         flex-direction: column;
         gap: 20px;
@@ -125,7 +123,7 @@
   <!-- Background -->
   <div class="bg-parallax"></div>
 
-  <!-- Foreground Content -->
+  <!-- Foreground -->
   <div class="container">
 
     <div class="logo">
@@ -133,30 +131,17 @@
     </div>
 
     <div class="description">
-      <p> A new initiative connecting sustainability, community, and mindful living launching soon.</p>
-      <p><br>
-        Stay tuned for updates. </p>
+      A new initiative connecting sustainability, community, and mindful living launching soon.<br>
+      Stay tuned for updates.
     </div>
 
     <div class="socials">
-      <!-- YouTube -->
-      <a
-        class="social"
-        href="https://www.youtube.com/@CoolVibrantFarms"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+      <a class="social" href="https://www.youtube.com/@CoolVibrantFarms" target="_blank" rel="noopener">
         <i class="fa-brands fa-youtube"></i>
         <span>@CoolVibrantFarms</span>
       </a>
 
-      <!-- Instagram -->
-      <a
-        class="social"
-        href="https://www.instagram.com/coolvibrant_farm/"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+      <a class="social" href="https://www.instagram.com/coolvibrant_farm/" target="_blank" rel="noopener">
         <i class="fa-brands fa-instagram"></i>
         <span>CoolVibrantFarm</span>
       </a>
@@ -168,10 +153,11 @@
     const bg = document.querySelector(".bg-parallax");
 
     document.addEventListener("mousemove", (e) => {
-      const x = (e.clientX / window.innerWidth - 0.5) * 18;
-      const y = (e.clientY / window.innerHeight - 0.5) * 18;
+      const x = (e.clientX / window.innerWidth - 0.5) * 14;
+      const y = (e.clientY / window.innerHeight - 0.5) * 14;
 
-      bg.style.transform = `translate(${x}px, ${y}px) scale(1.05)`;
+      /* Lower scale = higher clarity */
+      bg.style.transform = `translate(${x}px, ${y}px) scale(1.02)`;
     });
   </script>
 
